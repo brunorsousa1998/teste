@@ -18,7 +18,7 @@ jobs:
           && ls -lha'
 
       - name: 'sending files to remote machine'
-        run: 'scp
+        run: 'scp -r
           -i id_rsa
           -o StrictHostKeyChecking=no
           src package.json package-lock.json
