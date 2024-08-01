@@ -12,9 +12,15 @@ jobs:
       - name: 'Checkout'
         uses: 'actions/checkout@v4'
 
+      - name: 'Configuring ssh key'
+        run: '| \
+          echo ${{ secrets.DEPLOY_SERVER_KEY }} >> key
+          chmod 400 key
+          '
+
       - name: 'Copy files'
         run: 'scp \
-          -i ${{ secrets.DEPLOY_SERVER_KEY }} \
+          -i key \
           -o StrictHostKeyChecking=no \
           src package.json package-lock.json \
           ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }}:/opt/applications/test'
