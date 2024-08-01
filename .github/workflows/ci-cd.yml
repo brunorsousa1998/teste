@@ -1,13 +1,20 @@
-name: "Teste"
+name: 'Teste'
 
 on:
   push:
     branches:
-      - "master"
+      - 'master'
 
 jobs:
-  hello:
-    runs-on: "ubuntu-latest"
+  copy-files:
+    runs-on: 'ubuntu-latest'
     steps:
-      - name: "Say hello"
-        run: "echo Hello World"
+      - name: 'Checkout'
+        uses: 'actions/checkout@v4'
+
+      - name: 'Copy files'
+        run: 'scp \
+          -i ${{ secrets.DEPLOY_SERVER_KEY }} \
+          -o StrictHostKeyChecking=no \
+          src package.json package-lock.json \
+          ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }}:/opt/applications/test'
