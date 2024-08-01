@@ -18,8 +18,8 @@ jobs:
           && ls -lha'
 
       - name: 'sending files to remote machine'
-        run: 'scp \
-          -i id_rsa \
-          -o StrictHostKeyChecking=no \
-          src package.json package-lock.json \
+        run: 'scp
+          -i id_rsa
+          -o StrictHostKeyChecking=no
+          src package.json package-lock.json
           "${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }}:/opt/applications/test"'
