@@ -1,4 +1,4 @@
-name: 'Teste'
+name: 'teste'
 
 on:
   push:
@@ -9,16 +9,14 @@ jobs:
   copy-files:
     runs-on: 'ubuntu-latest'
     steps:
-      - name: 'Checkout'
+      - name: 'checkout'
         uses: 'actions/checkout@v4'
 
-      - name: 'Configuring ssh key'
-        run: '| \
-          echo ${{ secrets.DEPLOY_SERVER_KEY }} >> key
-          chmod 400 key
-          '
+      - name: configuring ssh key
+        run: 'echo ${{ secrets.DEPLOY_SERVER_KEY }} >> key
+          && chmod 400 key'
 
-      - name: 'Copy files'
+      - name: 'sending files to remote machine'
         run: 'scp \
           -i key \
           -o StrictHostKeyChecking=no \
