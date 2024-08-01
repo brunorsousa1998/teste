@@ -13,12 +13,13 @@ jobs:
         uses: 'actions/checkout@v4'
 
       - name: configuring ssh key
-        run: 'echo "${{ secrets.DEPLOY_SERVER_KEY }}" >> ssh-key
-          && chmod 400 ssh-key'
+        run: 'echo "${{ secrets.DEPLOY_SERVER_KEY }}" >> id_rsa
+          && chmod 600 id_rsa
+          && ls -lha'
 
       - name: 'sending files to remote machine'
         run: 'scp \
-          -i ssh-key \
+          -i id_rsa \
           -o StrictHostKeyChecking=no \
           src package.json package-lock.json \
-          ${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }}:/opt/applications/test'
+          "${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }}:/opt/applications/test"'
