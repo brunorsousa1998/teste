@@ -27,3 +27,10 @@ jobs:
           -o StrictHostKeyChecking=no
           src package.json package-lock.json
           "${{ secrets.DEPLOY_SERVER_USER }}@${{ secrets.DEPLOY_SERVER_HOST }}:/opt/applications/test"'
+
+  clear:
+    runs-on: self-hosted
+    steps:
+      - name: delete built image
+        run: |
+          docker prune -a -q
