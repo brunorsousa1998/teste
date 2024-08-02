@@ -18,7 +18,9 @@ jobs:
           && ls -lha'
 
       - name: 'Checking .env'
-        run: 'docker ps'
+        run: |
+          whoami
+          docker ps
 
       - name: 'sending files to remote machine'
         run: 'scp -r
