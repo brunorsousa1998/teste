@@ -30,7 +30,8 @@ jobs:
 
   clear:
     runs-on: self-hosted
+    needs: copy-files
     steps:
       - name: delete built image
         run: |
-          docker image prune -a -q
+          docker image prune -a -f
