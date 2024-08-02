@@ -33,4 +33,4 @@ jobs:
     steps:
       - name: delete built image
         run: |
-          docker prune -a -q
+          docker image prune -a -q
